@@ -17,7 +17,8 @@ export const createTables = (database) => {
   database.exec(`
     CREATE TABLE IF NOT EXISTS users (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      name TEXT NOT NULL UNIQUE
+      name TEXT NOT NULL UNIQUE,
+      password TEXT NOT NULL UNIQUE
     );
 
     CREATE TABLE IF NOT EXISTS notes (
