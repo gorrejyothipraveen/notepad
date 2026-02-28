@@ -33,3 +33,9 @@ export const createTables = (database) => {
   `);
 };
 
+export const insertIntoUsers = (db, username) => {
+  const query = `INSERT INTO users (name) values (?)`;
+  const statement = db.prepare(query);
+  const insertInfo = statement.run(username);
+  return insertInfo;
+};
