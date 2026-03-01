@@ -12,7 +12,8 @@ import {
   setUserDetailsIntoContext,
 } from "./middleware_handlers.js";
 
-import { addNote, editNote, profile, useNote } from "./profile_handlers.js";
+import { profile } from "./profile_handlers.js";
+import { addNote, editNote, useNote } from "./note_handlers.js";
 
 export const createApp = (db) => {
   const app = new Hono();
