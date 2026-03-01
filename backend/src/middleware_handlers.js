@@ -39,6 +39,17 @@ export const setNoteDetailsIntoContext = async (context, next) => {
   const db = context.get("db");
   const noteId = context.req.param("noteId");
   const note = getNote(db, noteId);
+  context.set("noteId", noteId);
   context.set("note", note);
+  await next();
+};
+
+export const retrieveDetails = async (context, next) => {
+  const noteId = context.req.param("noteId");
+  const payload = await context.req.formData();
+  const note = payload.get("newNote");
+  console.log({ note }, ">>>>----->   ");
+  context.set("newNote", note);
+  context.set("noteId", noteId);
   await next();
 };

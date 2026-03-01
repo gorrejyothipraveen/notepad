@@ -7,10 +7,10 @@
 
 <body>
   <main>
-    <form action="/edit_note" method="post">
+    <form action="<%= `/edit_note/${it.noteId}` %>" method="post">
       <section>
         <label for="note">Note : </label>
-        <textarea name="note" id="" cols="100" rows="50"><%= it.note %></textarea>
+        <textarea name="newNote" id="note" cols="100" rows="50"><%= it.note %></textarea>
       </section>
       <button type="submit">send</button>
     </form>
