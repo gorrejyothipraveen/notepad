@@ -21,7 +21,7 @@
   <main>
     <nav>
       <% it.notes.forEach( note=> { %>
-        <li><a href="<%= `${it.userId}/${note.id}` %>">
+        <li><a href="<%= `useNote/${it.userId}/${note.id}` %>">
             <%= note.name %>
           </a></li>
         <% }) %>

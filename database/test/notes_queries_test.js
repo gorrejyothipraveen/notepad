@@ -1,6 +1,11 @@
 import { assertEquals } from "jsr:@std/assert";
 import { beforeEach, describe, it } from "jsr:@std/testing/bdd";
-import { getNote, insertIntoNotes, notesList } from "../src/notes.queries.js";
+import {
+  getNote,
+  insertIntoNotes,
+  notesList,
+  updateNote,
+} from "../src/notes.queries.js";
 import { createDB, createTables } from "../src/common_queries.js";
 
 describe("test for the notes table : ", () => {
@@ -62,8 +67,29 @@ describe("test for the notes table : ", () => {
       db.prepare(`insert into notes (name, note, user_id) values (?, ?, ?)`)
         .run("js", "hello world", 1);
       const actual = getNote(db, 1);
-      const expected = 'js';
-      assertEquals(actual.name, expected)
+      const expected = "js";
+      assertEquals(actual.name, expected);
+    });
+  });
+
+  describe("test for the update note : ", () => {
+    it("should return an error : ", () => {
+      const actual = updateNote(db, 1, "hello world");
+      const expected = 0;
+      assertEquals(actual.changes, expected);
+    });
+
+    it("should update  the note 1 content :", () => {
+      db.prepare(`insert into users (name, password) values (?, ?)`).run(
+        "praveen",
+        "104",
+      );
+      db.prepare(`insert into notes (name, note, user_id) values (?, ?, ?)`)
+        .run("js", "hello world", 1);
+
+      const actual = updateNote(db, 1, "js content");
+      const expected = 1;
+      assertEquals(actual.changes, expected);
     });
   });
 });

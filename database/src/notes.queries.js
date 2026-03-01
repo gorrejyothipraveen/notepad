@@ -16,3 +16,9 @@ export const getNote = (db, noteId) => {
   const statement = db.prepare(query);
   return statement.get(noteId);
 };
+
+export const updateNote = (db, noteId, note) => {
+  const query = `update notes set note = ? where id = ?`;
+  const statement = db.prepare(query);
+  return statement.run(note, noteId);
+};

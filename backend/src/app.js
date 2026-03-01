@@ -5,9 +5,10 @@ import { login } from "./authentication_handler.js";
 import {
   allowAccountExistUsers,
   rejectAuthorizedUsers,
-  setNotesIntoContext,
+  setNoteDetailsIntoContext,
+  setUserDetailsIntoContext,
 } from "./middleware_handlers.js";
-import { profile } from "./profile_handlers.js";
+import { profile, useNote } from "./profile_handlers.js";
 
 export const createApp = (db) => {
   const app = new Hono();
@@ -19,7 +20,8 @@ export const createApp = (db) => {
     await next();
   });
 
-  app.get("/profile", setNotesIntoContext, profile);
+  app.get("/useNote/:noteId", setNoteDetailsIntoContext, useNote);
+  app.get("/profile", setUserDetailsIntoContext, profile);
   app.post("/login", allowAccountExistUsers, login);
   app.get(
     "/login.html",

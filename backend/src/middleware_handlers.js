@@ -1,6 +1,6 @@
 import { deleteCookie, getCookie } from "hono/cookie";
 import { getUser } from "../../database/src/users_queries.js";
-import { notesList } from "../../database/src/notes.queries.js";
+import { getNote, notesList } from "../../database/src/notes.queries.js";
 
 export const rejectAuthorizedUsers = async (context, next) => {
   const username = getCookie(context, "username");
@@ -23,14 +23,22 @@ export const allowAccountExistUsers = async (context, next) => {
   await next();
 };
 
-export const setNotesIntoContext = async (context, next) => {
+export const setUserDetailsIntoContext = async (context, next) => {
   const userId = getCookie(context, "userId");
-  const username = getCookie(context, "username")
+  const username = getCookie(context, "username");
   const db = context.get("db");
   const notes = notesList(db, userId);
   context.set("notes", notes);
   context.set("userId", userId);
-  context.set('username', username)
+  context.set("username", username);
   // deleteCookie(context, "username");
+  await next();
+};
+
+export const setNoteDetailsIntoContext = async (context, next) => {
+  const db = context.get("db");
+  const noteId = context.req.param("noteId");
+  const note = getNote(db, noteId);
+  context.set("note", note);
   await next();
 };
