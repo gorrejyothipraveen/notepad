@@ -1,0 +1,21 @@
+body {
+  background-color: mediumpurple;
+}
+
+* {
+  font-size: 1rem;
+}
+
+textarea {
+  background-color: rgb(173, 226, 246);
+}
+
+main form {
+  display: flex;
+  gap: 2rem;
+}
+
+button {
+  width: 5rem;
+  height: 2rem;
+}

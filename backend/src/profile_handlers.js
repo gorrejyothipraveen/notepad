@@ -1,6 +1,5 @@
 import { Eta } from "eta";
 import {
-  getNote,
   insertIntoNotes,
   updateNote,
 } from "../../database/src/notes.queries.js";
@@ -51,8 +50,3 @@ export const addNote = (context) => {
   return context.redirect(`/useNote/${lastInsertRowid}`);
 };
 
-export const logout = (context) => {
-  deleteCookie(context, "username");
-  deleteCookie(context, "userId");
-  return context.redirect("/login.html", 303)
-};

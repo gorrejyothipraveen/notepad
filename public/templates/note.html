@@ -3,6 +3,7 @@
 
 <head>
   <title>note</title>
+  <link rel="stylesheet" href="../css/note_styles.css">
 </head>
 
 <body>
@@ -10,7 +11,7 @@
     <form action="<%= `/edit_note/${it.noteId}` %>" method="post">
       <section>
         <label for="note">Note : </label>
-        <textarea name="newNote" id="note" cols="100" rows="50"><%= it.note %></textarea>
+        <textarea name="newNote" id="note" cols="100" rows="42"><%= it.note %></textarea>
       </section>
       <button type="submit">save</button>
     </form>

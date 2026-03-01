@@ -1,7 +1,8 @@
 import { Hono } from "hono";
 import { serveStatic } from "hono/deno";
 import { logger } from "hono/logger";
-import { login } from "./authentication_handler.js";
+import { login, logout } from "./authentication_handler.js";
+
 import {
   allowAccountExistUsers,
   rejectAuthorizedUsers,
@@ -10,13 +11,8 @@ import {
   setNoteDetailsIntoContext,
   setUserDetailsIntoContext,
 } from "./middleware_handlers.js";
-import {
-  addNote,
-  editNote,
-  logout,
-  profile,
-  useNote,
-} from "./profile_handlers.js";
+
+import { addNote, editNote, profile, useNote } from "./profile_handlers.js";
 
 export const createApp = (db) => {
   const app = new Hono();
