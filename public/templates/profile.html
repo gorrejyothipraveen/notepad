@@ -28,7 +28,7 @@
     </nav>
     <section>
       <h2>Create New Note </h2>
-      <form action="/addNote" method="post">
+      <form action="<%= `addNote/${it.userId}` %>" method="post">
         <section>
           <label for="name">Note Name : </label>
           <input type="text" name="name" id="name">

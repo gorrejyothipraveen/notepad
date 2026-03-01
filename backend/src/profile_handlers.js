@@ -1,5 +1,9 @@
 import { Eta } from "eta";
-import { updateNote } from "../../database/src/notes.queries.js";
+import {
+  getNote,
+  insertIntoNotes,
+  updateNote,
+} from "../../database/src/notes.queries.js";
 
 const profileTemplate = (profileInfo) => {
   const eta = new Eta({ views: "public/templates" });
@@ -7,7 +11,7 @@ const profileTemplate = (profileInfo) => {
 };
 
 const noteTemplate = (noteInfo) => {
-  console.log(noteInfo)
+  console.log(noteInfo);
   const eta = new Eta({ views: "public/templates" });
   return eta.render("/note.eta", noteInfo);
 };
@@ -37,5 +41,13 @@ export const editNote = (context) => {
 };
 
 export const addNote = (context) => {
-  
-}
+  const note = "New Note : ";
+  const db = context.get("db");
+  const userId = context.get("userId");
+  const noteName = context.get("name");
+  console.log({ note, userId, noteName });
+  const { lastInsertRowid } = insertIntoNotes(db, noteName, note, userId);
+  return context.redirect(`/useNote/${lastInsertRowid}`);
+};
+
+// export const logout = (context) => {}

@@ -48,8 +48,16 @@ export const retrieveDetails = async (context, next) => {
   const noteId = context.req.param("noteId");
   const payload = await context.req.formData();
   const note = payload.get("newNote");
-  console.log({ note }, ">>>>----->   ");
   context.set("newNote", note);
   context.set("noteId", noteId);
+  await next();
+};
+
+export const retrieveDetailsForCreateNote = async (context, next) => {
+  const userId = context.req.param("userId");
+  const payload = await context.req.formData();
+  const noteName = payload.get("name");
+  context.set("userId", userId);
+  context.set("name", noteName);
   await next();
 };
