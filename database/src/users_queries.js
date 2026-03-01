@@ -5,8 +5,8 @@ export const insertIntoUsers = (db, username, password) => {
   return insertInfo;
 };
 
-export const usersList = (db) => {
-  const query = `SELECT id, name FROM users`;
+export const getUser = (db, username) => {
+  const query = `SELECT id, name FROM users WHERE name = ?`;
   const statement = db.prepare(query);
-  return statement.all();
+  return statement.get(username);
 };

@@ -1,6 +1,6 @@
 import { assertEquals } from "jsr:@std/assert";
 import { beforeEach, describe, it } from "jsr:@std/testing/bdd";
-import { insertIntoUsers, usersList } from "../src/users_queries.js";
+import { insertIntoUsers, getUser } from "../src/users_queries.js";
 import { createDB, createTables } from "../src/common_queries.js";
 
 describe("test for the users table : ", () => {
@@ -21,8 +21,8 @@ describe("test for the users table : ", () => {
 
   describe("test for the list functionality", () => {
     it("==> should return empty array ", () => {
-      const actual = usersList(db);
-      const expected = [];
+      const actual = getUser(db, '');
+      const expected = undefined;
       assertEquals(actual, expected);
     });
 
@@ -31,9 +31,9 @@ describe("test for the users table : ", () => {
         "praveen",
         "104",
       );
-      const actual = usersList(db);
+      const actual = getUser(db, 'praveen');
       const expected = 1;
-      assertEquals(actual.length, expected);
+      assertEquals(actual.id, expected);
     });
   });
 });
