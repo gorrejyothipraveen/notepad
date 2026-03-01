@@ -3,7 +3,6 @@ import {
   insertIntoNotes,
   updateNote,
 } from "../../database/src/notes.queries.js";
-import { deleteCookie } from "hono/cookie";
 
 const profileTemplate = (profileInfo) => {
   const eta = new Eta({ views: "public/templates" });
