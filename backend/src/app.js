@@ -6,6 +6,7 @@ import {
   allowAccountExistUsers,
   rejectAuthorizedUsers,
 } from "./middleware_handlers.js";
+import { profile } from "./profile_handlers.js";
 
 export const createApp = (db) => {
   const app = new Hono();
@@ -17,6 +18,7 @@ export const createApp = (db) => {
     await next();
   });
 
+  app.get('/profile', profile)
   app.post("/login", rejectAuthorizedUsers, allowAccountExistUsers, login);
   app.get("*", serveStatic({ root: "public" }));
   return app;
