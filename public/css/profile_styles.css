@@ -1,7 +1,12 @@
 * {
   margin: 0px;
   font-family: sans-serif;
+  font-size: 1.2rem;
   font-weight: 350;
+}
+
+h1 {
+  font-size: 1.9rem;
 }
 
 body {
@@ -15,11 +20,11 @@ body > header {
   padding: 2rem;
 }
 
-body  header {
+body header {
   width: 100vw;
   place-items: end;
   background-color: rgb(245, 139, 1);
-  border-bottom: 0.1rem solid black;
+  border-bottom: 0.08rem solid black;
 }
 
 body > main {
@@ -39,8 +44,17 @@ body main nav {
   height: 100%;
   width: 100%;
   background-color: antiquewhite;
-  border: 0.1rem solid black;
+  border: 0.01rem solid black;
   font-size: 1.6rem;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+li {
+  list-style: none;
 }
 
 body main > section {

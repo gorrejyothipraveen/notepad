@@ -1,4 +1,4 @@
-import { deleteCookie, getCookie } from "hono/cookie";
+import { getCookie } from "hono/cookie";
 import { getUser } from "../../database/src/users_queries.js";
 import { getNote, notesList } from "../../database/src/notes.queries.js";
 
@@ -31,7 +31,6 @@ export const setUserDetailsIntoContext = async (context, next) => {
   context.set("notes", notes);
   context.set("userId", userId);
   context.set("username", username);
-  // deleteCookie(context, "username");
   await next();
 };
 
