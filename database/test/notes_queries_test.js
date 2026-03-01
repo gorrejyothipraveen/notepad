@@ -2,6 +2,7 @@ import { assertEquals } from "jsr:@std/assert";
 import { beforeEach, describe, it } from "jsr:@std/testing/bdd";
 import { insertIntoNotes, notesList } from "../src/notes.queries.js";
 import { createDB, createTables } from "../src/common_queries.js";
+
 describe("test for the notes table : ", () => {
   let db;
 
@@ -9,6 +10,7 @@ describe("test for the notes table : ", () => {
     db = createDB(":memory:");
     createTables(db);
   });
+  
   describe("test for the insert functionality :", () => {
     it("==> should return last insert id as 1 : ", () => {
       db.prepare(`insert into users (name, password) values (?, ?)`).run("praveen", "104");
