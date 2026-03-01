@@ -28,6 +28,7 @@ export const setNotesIntoContext = async (context, next) => {
   const db = context.get("db");
   const notes = notesList(db, userId);
   context.set("notes", notes);
+  context.set("userId", userId);
   // deleteCookie(context, "username");
   await next();
 };

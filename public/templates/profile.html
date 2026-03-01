@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Profile Page</title>
+  <link rel="stylesheet" href="../css/profile_styles.css">
+</head>
+
+<body>
+  <header>
+    <h1>Your Profile </h1>
+    <form action="/logout">
+      <section>
+        <button type="submit">logout</button>
+      </section>
+    </form>
+  </header>
+  <main>
+    <nav>
+      <% it.notes.forEach( note=> { %>
+        <li><a href="/note">
+            <%= note.name %>
+          </a></li>
+        <% }) %>
+    </nav>
+    <section>
+      <h2>Create New Note </h2>
+      <form action="/addNote" method="post">
+        <section>
+          <label for="name">Note Name : </label>
+          <input type="text" name="name" id="name">
+        </section>
+        <button type="submit">Create</button>
+      </form>
+    </section>
+  </main>
+</body>
+
+</html>
