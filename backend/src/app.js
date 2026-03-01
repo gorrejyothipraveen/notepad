@@ -5,6 +5,7 @@ import { login } from "./authentication_handler.js";
 import {
   allowAccountExistUsers,
   rejectAuthorizedUsers,
+  setNotesIntoContext,
 } from "./middleware_handlers.js";
 import { profile } from "./profile_handlers.js";
 
@@ -18,8 +19,13 @@ export const createApp = (db) => {
     await next();
   });
 
-  app.get('/profile', profile)
-  app.post("/login", rejectAuthorizedUsers, allowAccountExistUsers, login);
+  app.get("/profile", setNotesIntoContext, profile);
+  app.post("/login", allowAccountExistUsers, login);
+  app.get(
+    "/login.html",
+    rejectAuthorizedUsers,
+    serveStatic({ root: "public" }),
+  );
   app.get("*", serveStatic({ root: "public" }));
   return app;
 };

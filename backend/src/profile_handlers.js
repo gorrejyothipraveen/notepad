@@ -1,3 +1,5 @@
 export const profile = (context) => {
-  return context.text("Profile Page");
+  console.log('profile page : ')
+  const notes = context.get("notes");
+  return context.json({ notes });
 };

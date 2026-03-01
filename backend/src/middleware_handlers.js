@@ -1,10 +1,11 @@
-import { getCookie } from "hono/cookie";
+import { deleteCookie, getCookie } from "hono/cookie";
 import { getUser } from "../../database/src/users_queries.js";
+import { notesList } from "../../database/src/notes.queries.js";
 
 export const rejectAuthorizedUsers = async (context, next) => {
   const username = getCookie(context, "username");
   if (username) {
-    context.redirect("/profile", 303);
+    return context.redirect("/profile", 303);
   }
   await next();
 };
@@ -17,6 +18,16 @@ export const allowAccountExistUsers = async (context, next) => {
   if (!userInfo) {
     return context.redirect("/login.html", 303);
   }
+  context.set("userId", userInfo.id);
   context.set("username", userInfo.name);
+  await next();
+};
+
+export const setNotesIntoContext = async (context, next) => {
+  const userId = getCookie(context, "userId");
+  const db = context.get("db");
+  const notes = notesList(db, userId);
+  context.set("notes", notes);
+  // deleteCookie(context, "username");
   await next();
 };
