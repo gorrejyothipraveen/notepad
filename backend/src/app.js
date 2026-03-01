@@ -10,7 +10,13 @@ import {
   setNoteDetailsIntoContext,
   setUserDetailsIntoContext,
 } from "./middleware_handlers.js";
-import { addNote, editNote, profile, useNote } from "./profile_handlers.js";
+import {
+  addNote,
+  editNote,
+  logout,
+  profile,
+  useNote,
+} from "./profile_handlers.js";
 
 export const createApp = (db) => {
   const app = new Hono();
@@ -22,6 +28,7 @@ export const createApp = (db) => {
     await next();
   });
 
+  app.post("/logout", logout);
   app.post("/addNote/:userId", retrieveDetailsForCreateNote, addNote);
   app.post("/edit_note/:noteId", retrieveDetails, editNote);
   app.get("/useNote/:noteId", setNoteDetailsIntoContext, useNote);

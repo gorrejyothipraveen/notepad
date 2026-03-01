@@ -4,6 +4,7 @@ import {
   insertIntoNotes,
   updateNote,
 } from "../../database/src/notes.queries.js";
+import { deleteCookie } from "hono/cookie";
 
 const profileTemplate = (profileInfo) => {
   const eta = new Eta({ views: "public/templates" });
@@ -50,4 +51,8 @@ export const addNote = (context) => {
   return context.redirect(`/useNote/${lastInsertRowid}`);
 };
 
-// export const logout = (context) => {}
+export const logout = (context) => {
+  deleteCookie(context, "username");
+  deleteCookie(context, "userId");
+  return context.redirect("/login.html", 303)
+};

@@ -9,7 +9,7 @@
 <body>
   <header>
     <h1>Your Profile </h1>
-    <form action="/logout">
+    <form action="/logout" method="post">
       <section>
         <span>
           <%= it.username %>
@@ -21,7 +21,7 @@
   <main>
     <nav>
       <% it.notes.forEach( note=> { %>
-        <li><a href="<%= `useNote/${note.id}` %>">
+        <li><a href="<%= `useNote/${it.userId}/${note.id}` %>">
             <%= note.name %>
           </a></li>
         <% }) %>
