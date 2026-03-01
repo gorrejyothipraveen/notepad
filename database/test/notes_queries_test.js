@@ -1,6 +1,6 @@
 import { assertEquals } from "jsr:@std/assert";
 import { beforeEach, describe, it } from "jsr:@std/testing/bdd";
-import { insertIntoNotes, notesList } from "../src/notes.queries.js";
+import { getNote, insertIntoNotes, notesList } from "../src/notes.queries.js";
 import { createDB, createTables } from "../src/common_queries.js";
 
 describe("test for the notes table : ", () => {
@@ -10,10 +10,13 @@ describe("test for the notes table : ", () => {
     db = createDB(":memory:");
     createTables(db);
   });
-  
+
   describe("test for the insert functionality :", () => {
     it("==> should return last insert id as 1 : ", () => {
-      db.prepare(`insert into users (name, password) values (?, ?)`).run("praveen", "104");
+      db.prepare(`insert into users (name, password) values (?, ?)`).run(
+        "praveen",
+        "104",
+      );
       const actual = insertIntoNotes(db, "js", "hello world", 1);
       const expected = 1;
       assertEquals(actual.lastInsertRowid, expected);
@@ -22,19 +25,45 @@ describe("test for the notes table : ", () => {
 
   describe("test fot the list functionality : ", () => {
     it("==> should return empty list : ", () => {
-      db.prepare(`insert into users (name, password) values (?, ?)`).run("praveen", "104");
+      db.prepare(`insert into users (name, password) values (?, ?)`).run(
+        "praveen",
+        "104",
+      );
       const actual = notesList(db, 1);
       const expected = [];
       assertEquals(actual, expected);
     });
 
     it("==> should return 1 record : ", () => {
-      db.prepare(`insert into users (name, password) values (?, ?)`).run("praveen", "104");
+      db.prepare(`insert into users (name, password) values (?, ?)`).run(
+        "praveen",
+        "104",
+      );
       db.prepare(`insert into notes (name, note, user_id) values (?, ?, ?)`)
         .run("js", "hello world", 1);
       const actual = notesList(db, 1);
       const expected = 1;
       assertEquals(actual.length, expected);
+    });
+  });
+
+  describe("retrieving the single record", () => {
+    it("should return undefined", () => {
+      const actual = getNote(db, 1);
+      const expected = undefined;
+      assertEquals(actual, expected);
+    });
+
+    it("should return 1 record : ", () => {
+      db.prepare(`insert into users (name, password) values (?, ?)`).run(
+        "praveen",
+        "104",
+      );
+      db.prepare(`insert into notes (name, note, user_id) values (?, ?, ?)`)
+        .run("js", "hello world", 1);
+      const actual = getNote(db, 1);
+      const expected = 'js';
+      assertEquals(actual.name, expected)
     });
   });
 });

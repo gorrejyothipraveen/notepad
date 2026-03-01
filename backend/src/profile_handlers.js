@@ -5,7 +5,9 @@ const profileTemplate = (profileInfo) => {
 };
 
 export const profile = (context) => {
+  const username = context.get("username");
+  const userId = context.get("userId");
   const notes = context.get("notes");
-  const page = profileTemplate({ notes });
+  const page = profileTemplate({ notes, username, userId  });
   return context.html(page);
 };

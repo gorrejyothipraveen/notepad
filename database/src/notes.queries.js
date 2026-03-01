@@ -6,7 +6,13 @@ export const insertIntoNotes = (db, noteName, note, userId) => {
 };
 
 export const notesList = (db, userId) => {
-  const query = `SELECT name, note FROM notes WHERE user_id = ?`;
+  const query = `SELECT id, name, note FROM notes WHERE user_id = ?`;
   const statement = db.prepare(query);
   return statement.all(userId);
+};
+
+export const getNote = (db, noteId) => {
+  const query = `SELECT name, note FROM notes WHERE id = ?`;
+  const statement = db.prepare(query);
+  return statement.get(noteId);
 };

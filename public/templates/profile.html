@@ -11,6 +11,9 @@
     <h1>Your Profile </h1>
     <form action="/logout">
       <section>
+        <span>
+          <%= it.username %>
+        </span>
         <button type="submit">logout</button>
       </section>
     </form>
@@ -18,7 +21,7 @@
   <main>
     <nav>
       <% it.notes.forEach( note=> { %>
-        <li><a href="/note">
+        <li><a href="<%= `${it.userId}/${note.id}` %>">
             <%= note.name %>
           </a></li>
         <% }) %>

@@ -25,10 +25,12 @@ export const allowAccountExistUsers = async (context, next) => {
 
 export const setNotesIntoContext = async (context, next) => {
   const userId = getCookie(context, "userId");
+  const username = getCookie(context, "username")
   const db = context.get("db");
   const notes = notesList(db, userId);
   context.set("notes", notes);
   context.set("userId", userId);
+  context.set('username', username)
   // deleteCookie(context, "username");
   await next();
 };
